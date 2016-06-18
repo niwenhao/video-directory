@@ -1,0 +1,5 @@
+version: "2"
+services:
+    ruby:
+        build: ruby
+        command: bash -c 'while true; do sleep 10; done'
