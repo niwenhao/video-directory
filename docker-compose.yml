@@ -1,5 +1,8 @@
 version: "2"
 services:
     ruby:
+        image: niwenhao/ruby
+        container_name: dev
+        hostname: devhost
         build: ruby
         command: bash -c 'while true; do sleep 10; done'
