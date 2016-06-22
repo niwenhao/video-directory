@@ -5,4 +5,7 @@ services:
         container_name: dev
         hostname: devhost
         build: ruby
+        volume:
+            - ${PWD}/application:/usr/local/video-directory
+        working_dir: /usr/local/video-directory
         command: bash -c 'while true; do sleep 10; done'
