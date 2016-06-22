@@ -1,11 +1,12 @@
 version: "2"
 services:
     ruby:
-        image: niwenhao/ruby
+        image: videodir
         container_name: dev
         hostname: devhost
-        build: ruby
+        build: env
         volumes:
             - ${HOME}/workspace/video-directory/application:/usr/local/video-directory
-        working_dir: /usr/local/video-directory
+        ports:
+            - 8080:2345
         command: bash -c 'while true; do sleep 10; done'
