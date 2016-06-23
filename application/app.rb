@@ -1,10 +1,13 @@
 require "sinatra"
+require "byebug"
 
-VIDEO_DIR=/video/
+VIDEO_DIR="/usr/"
+VIDEO_URL="/contents/"
 
 get '/video/*' do |path|
-    path = VIDEO_DIR + path
-    if File.directory? path
+    path.gsub!(/\/$/, "")
+    abs_path = VIDEO_DIR + path
+    if File.directory? abs_path
         render_directory path
     else
         render_file path
@@ -12,23 +15,42 @@ get '/video/*' do |path|
 end
 
 def render_directory(path)
-    erb :dir_content 
+    if path == ""
+        path = "."
+    end
+    file_list = Dir.new(VIDEO_DIR + path).map { |f| f }
+    file_list.sort!.reject! { |f| f == "." or f == ".." }
+    erb :dir_content, :locals => { :path => path, :file_list => file_list }
 end
 
+def render_file(path)
+    erb :file_content, :locals => { :path => path }
+end
 
-@@layout
+__END__
+
+@@ layout
 <html>
 <head>
-    <title>Video(<%=path>)</title>
+    <title>Video(<%= path %>)</title>
 </head>
-<body>path + file.
-    <p id="video_list">
-        <% file_list.each do |file| >
-        <a href="<%=path + file.%>
-        <% end %>
-    </p>
+<body>
+<%= yield %>
 </body>
 </html>
 
-@@dir_content
+@@ dir_content
+    <p><a href="/video/<%= path.gsub(/[^\/][^\/]+$/, "") %>">Back</a></p>
+    <p id="video_list">
+        <% file_list.each do |file| %>
+        <a href="/video/<%=path + "/" + file%>"><%=file%></a><br/>
+        <% end %>
+    </p>
+
+@@ file_content
+    <p><a href="/video/<%= path.gsub(/(^|\/)[^\/]+$/, "") %>">Back</a></p>
+    <p id="video_play">
+        <%=VIDEO_URL%><%=path%>
+    </p>
+
 

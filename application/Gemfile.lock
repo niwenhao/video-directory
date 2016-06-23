@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    byebug (9.0.5)
+    erubis (2.7.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -14,6 +16,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
+  erubis
   sinatra
 
 BUNDLED WITH
