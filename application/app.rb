@@ -1,5 +1,4 @@
 require "sinatra"
-require "byebug"
 
 VIDEO_DIR="/usr/"
 VIDEO_URL="/contents/"
