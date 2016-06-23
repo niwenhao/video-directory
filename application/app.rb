@@ -10,3 +10,25 @@ get '/video/*' do |path|
         render_file path
     end
 end
+
+def render_directory(path)
+    erb :dir_content 
+end
+
+
+@@layout
+<html>
+<head>
+    <title>Video(<%=path>)</title>
+</head>
+<body>path + file.
+    <p id="video_list">
+        <% file_list.each do |file| >
+        <a href="<%=path + file.%>
+        <% end %>
+    </p>
+</body>
+</html>
+
+@@dir_content
+
