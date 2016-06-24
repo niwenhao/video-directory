@@ -1,7 +1,7 @@
 require "sinatra"
 
-VIDEO_DIR="/usr/"
-VIDEO_URL="/contents/"
+VIDEO_DIR="/var/www/html/stream/"
+VIDEO_URL="/stream/"
 
 get '/video/*' do |path|
     path.gsub!(/\/$/, "")
@@ -49,7 +49,7 @@ __END__
 @@ file_content
     <p><a href="/video/<%= path.gsub(/(^|\/)[^\/]+$/, "") %>">Back</a></p>
     <p id="video_play">
-        <%=VIDEO_URL%><%=path%>
+        <video src="<%=VIDEO_URL%><%=path%>" autoplay controls/>
     </p>
 
 
